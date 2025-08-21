@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Mi Amor ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Pantalla de bienvenida -->
+    <div id="welcome-screen" class="welcome-screen">
+        <div class="welcome-content">
+            <h1 class="welcome-title">¡Hola Mi Amor!</h1>
+            <p class="welcome-subtitle">Tengo algo especial para ti...</p>
+            <button id="enter-btn" class="enter-btn">
+                <i class="fas fa-heart"></i>
+                Entrar
+            </button>
+        </div>
+        <div class="floating-hearts"></div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-heart"></i>
+                <span>Para Ti</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#mensajes" class="nav-link">Mensajes</a></li>
+                <li><a href="#recuerdos" class="nav-link">Recuerdos</a></li>
+                <li><a href="#fotos" class="nav-link">Fotos</a></li>
+                <li><a href="#sorpresa" class="nav-link">Sorpresa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content" id="main-content">
+        <!-- Sección de inicio -->
+        <section id="inicio" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">¡Feliz Cumpleaños!</h1>
+                <h2 class="hero-subtitle">Princesa de mi vida</h2>
+                <p class="hero-text">Hoy estamos de celebración por tu cumpleaños, pero yo todos los días celebro cada instante que paso contigo. Tu risa, tus abrazos, tus mordiscos asesinos... todo eso que me hace sentir que estoy compartiendo mi vida con la persona indicada.</p>
+                <p class="hero-text">Gracias por ser como eres, gracias por ser el amor de mi vida, por elegirme y por hacerme ser cada día mejor.</p>
+
+                <div class="countdown-container">
+                    <h3>Quedan:</h3>
+                    <div id="countdown" class="countdown"></div>
+                </div>
+            </div>
+            <div class="hero-animation">
+                <div class="birthday-cake">
+                    <div class="cake-base"></div>
+                    <div class="cake-middle"></div>
+                    <div class="cake-top"></div>
+                    <div class="candles">
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de mensajes -->
+        <section id="mensajes" class="messages-section">
+            <div class="container">
+                <h2 class="section-title">Mensajes del Corazón</h2>
+                <div class="messages-grid">
+                    <div class="message-card" data-message="1">
+                        <div class="message-front">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Para la más bella</h3>
+                        </div>
+                        <div class="message-back">
+                            <p>Cada día a tu lado es un regalo. Tu sonrisa ilumina mi mundo y tu amor llena mi corazón de felicidad.</p>
+                        </div>
+                    </div>
+                    <div class="message-card" data-message="2">
+                        <div class="message-front">
+                            <i class="fas fa-star"></i>
+                            <h3>Mi estrella</h3>
+                        </div>
+                        <div class="message-back">
+                            <p>Si tu me amas como yo te amo, por que no nos besamos por donde meamos.</p>
+                            <img src="11.jpg" width="100" height="100">
+                        </div>
+                    </div>
+                    <div class="message-card" data-message="3">
+                        <div class="message-front">
+                            <i class="fas fa-infinity"></i>
+                            <h3>Por siempre</h3>
+                        </div>
+                        <div class="message-back">
+                            <p>Eres la razón por la que creo en los cuentos de hadas. Contigo he encontrado mi final feliz.</p>
+                        </div>
+                    </div>
+                    <div class="message-card" data-message="4">
+                        <div class="message-front">
+                            <i class="fas fa-heart"></i>
+                            <h3>Para mi amor</h3>
+                        </div>
+                        <div class="message-back">
+                            <p>Si se juntan lo mares y los ríos, porque no juntamos tus labios con los míos.</p>
+                            <img src="12.jpg" width="100" height="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de recuerdos -->
+        <section id="recuerdos" class="memories-section">
+            <div class="container">
+                <h2 class="section-title">Nuestros Recuerdos</h2>
+                <div class="timeline">
+                    <div class="timeline-item" data-date="Primer encuentro">
+                        <div class="timeline-content">
+                            <h3>El día que nos conocimos</h3>
+                            <p>Ese momento de conectar tan fuerte con alguien, cuando nos conocimos, fue uno de los días más importantes de mi vida. Y quien hubiera dicho que ese día comenzaría la aventura de mi vida.</p>
+
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-date="Primera cita">
+                        <div class="timeline-content">
+                            <h3>Nuestra primera cita</h3>
+                            <p>Primero nervios, después risas y conexión total el uno con el otro, como si nos conocieramos de toda la vida.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-date="Primer 'Te amo'">
+                        <div class="timeline-content">
+                            <h3>Las palabras más importantes</h3>
+                            <p>La primera vez que nos dijimos lo mucho que nos queriamos, desde ese momento no he podido dejar de quererte cada vez más y más.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-date="Aventuras juntos">
+                        <div class="timeline-content">
+                            <h3>Nuestro primer año juntos</h3>
+                            <p>Cada momento compartido, cada vivencia juntos, cada momento especial, cada momento más. Y tú, eres la razón de mi felicidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de fotos -->
+        <section id="fotos" class="photos-section">
+            <div class="container">
+                <h2 class="section-title">Nuestro Álbum del Amor</h2>
+                <div class="photo-gallery">
+                    <div class="photo-item" data-photo="1">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-image"></i>
+                            <p>Nuestra primera foto juntos</p>
+                            <img src="1.jpg">
+                        </div>
+                    </div>
+                    <div class="photo-item" data-photo="2">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-suitcase"></i>
+                            <p>Nuestro primer viaje</p>
+                            <img src="2.jpg">
+                        </div>
+                    </div>
+                    <div class="photo-item" data-photo="3">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-thumbs-up"></i>
+                            <p>Una foto que te gusta mucho :)</p>
+                            <img src="3.jpg">
+                        </div>
+                    </div>
+                    <div class="photo-item" data-photo="4">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-candy-cane"></i>
+                            <p>Nuestras primeras navidades juntos</p>
+                            <img src="4.jpg">
+                        </div>
+                    </div>
+                    <div class="photo-item" data-photo="5">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-poo"></i>
+                            <p>La primera vez que me hice caca delante tuyo</p>
+                            <img src="5.jpg">
+                        </div>
+                    </div>
+                    <div class="photo-item" data-photo="6">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-futbol"></i>
+                            <p>Nuestra primera vez en el mejor campo de asturias juntos ;)</p>
+                            <img src="6.jpg">
+                        </div>
+                    </div>
+                    <div class="photo-item" data-photo="3">
+                    <div class="photo-placeholder">
+                            <i class="fas fa-golf-ball-tee"></i>
+                            <p>Cuando te humillaba al golf</p>
+                            <img src="10.jpg">
+                    </div>
+                    </div>
+                    <div class="photo-item" data-photo="4">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-face-smile-beam"></i>
+                            <p>Un día muy feliz <3</p>
+                            <img src="7.jpg">
+                        </div>
+                    </div>
+                    <div class="photo-item" data-photo="5">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-earth-europe"></i>
+                            <p>Nuestro mundo juntos</p>
+                            <img src="8.jpg">
+                        </div>
+                    </div>
+                    <div class="photo-item" data-photo="6">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-spinner"></i>
+                            <p>Y lo que nos queda por vivir juntos...</p>
+                            <img src="9.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección sorpresa -->
+        <section id="sorpresa" class="surprise-section">
+            <div class="container">
+                <h2 class="section-title">¡Sorpresa Especial!</h2>
+                <div class="surprise-container">
+                    <div class="gift-box" id="gift-box">
+                        <div class="gift-lid"></div>
+                        <div class="gift-base"></div>
+                        <div class="gift-ribbon-v"></div>
+                        <div class="gift-ribbon-h"></div>
+                        <div class="gift-bow"></div>
+                    </div>
+                    <p class="surprise-text">Haz clic en el regalo para descubrir tu sorpresa</p>
+                    <div id="surprise-content" class="surprise-content hidden">
+                        <h3>¡Mi promesa para ti!</h3>
+                        <p class="love-letter">
+                            Mi vida en este día tan especial quiero aprovechar para decirte que eres el amor de mi vida y que quiero seguir viendote crecer a mi lado. 
+                            Eres mi mejor amiga, la niña de mis ojos y mi amor verdadero. 
+                            Que este nuevo año de vida se te presente con buena cara y con todas tus metas sueños cumplidos.
+                            <br><br>
+                            ¡Te amo más de lo que mis palabras pueden expresar!
+                            <br><br>
+                            Con todo mi amor,<br>
+                            El amor de tu vida (Quieras o no ❤️🔪)
+                        </p>
+                    <p>Aquí tienes una canción que quiero que escuches atentamente:</p>
+                        <div class="surprise-actions">
+                            <button id="play-song" class="surprise-btn">
+                                <i class="fas fa-music"></i>
+                                Mi canción para ti
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para deseos -->
+    <div id="wishes-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Mis deseos para ti</h3>
+            <div class="wishes-container">
+                <div class="wish-item">
+                    <i class="fas fa-star"></i>
+                    <p>Que todos tus sueños se hagan realidad</p>
+                </div>
+                <div class="wish-item">
+                    <i class="fas fa-heart"></i>
+                    <p>Que nuestro amor crezca cada día más</p>
+                </div>
+                <div class="wish-item">
+                    <i class="fas fa-smile"></i>
+                    <p>Que tu sonrisa nunca se borre de tu rostro</p>
+                </div>
+                <div class="wish-item">
+                    <i class="fas fa-sun"></i>
+                    <p>Que cada día sea brillante como tú</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elementos ocultos para sorpresas -->
+    <div class="hidden-surprises">
+        <div id="floating-hearts-container"></div>
+        <div id="confetti-container"></div>
+    </div>
+
+    <!-- Música de fondo (solo una vez) -->
+    <audio id="bg-music" src="song.mp3" loop></audio>
+
+    <!-- Mini-reproductor flotante (solo uno) -->
+    <div id="mini-player" class="mini-player hidden">
+        
+        <p>🎵 Reproduciendo: Mi Canción Para Ti</p>
+        <button id="close-mini-player" class="close-btn">×</button>
+        <audio id="special-music" src="CancionFinal.mp3"></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

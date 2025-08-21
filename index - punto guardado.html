@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños, Amor</title>
+
+<!-- =====================================================
+     ESTILOS
+===================================================== -->
+<style>
+/* ======== ESTILOS GENERALES ======== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg,#ffe6f0,#fff8e1);
+  overflow-x: hidden;
+}
+
+button {
+  background:#d6336c;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:16px;
+  margin-top:20px;
+  transition:0.3s;
+}
+button:hover { background:#b02555; }
+
+/* ======== OVERLAYS ======== */
+.overlay {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  z-index:9999;
+  color:#fff;
+  background:#111;
+}
+.overlay-container {
+  background:#222;
+  padding:30px;
+  border-radius:12px;
+  max-width:450px;
+  width:90%;
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+.overlay h2 {
+  margin-bottom:20px;
+  font-size:1.5rem;
+  min-height:50px;
+}
+.option {
+  display:block;
+  margin:10px 0;
+  padding:12px;
+  background:#333;
+  border-radius:8px;
+  cursor:pointer;
+  transition:background 0.3s, transform 0.3s, opacity 0.5s;
+  opacity:0;
+  transform:translateY(20px);
+}
+.option.visible { opacity:1; transform:translateY(0); }
+.option:hover { background:#555; }
+#message { margin-top:15px; min-height:20px; font-weight:bold; }
+
+/* ======== CONTENIDO PRINCIPAL ======== */
+#main-content { display:none; opacity:0; transition:opacity 1s ease; }
+
+h1, h2.section-title {
+  text-align:center;
+  font-family:'Brush Script MT', cursive;
+  color:#d6336c;
+}
+h1 {
+  font-size:3rem;
+  margin-top:40px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:all 1s ease;
+}
+h1.visible { opacity:1; transform:translateY(0); }
+
+h2.section-title {
+  font-size:2rem;
+  margin-bottom:20px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:all 1s ease;
+}
+h2.section-title.visible { opacity:1; transform:translateY(0); }
+
+.section {
+  padding:40px 20px;
+  max-width:800px;
+  margin:auto;
+  text-align:center;
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 1s ease;
+}
+.section.visible { opacity:1; transform:translateY(0); }
+
+#sorpresa {
+  display:none;
+  background:#fff0f5;
+  padding:20px;
+  border-radius:10px;
+  margin-top:20px;
+  font-style:italic;
+  font-size:1.3rem;
+  color:#b02555;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+  gap:10px;
+  margin-top:20px;
+}
+.gallery img {
+  width:100%;
+  border-radius:10px;
+  transition:transform 0.3s ease, opacity 1s ease;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(20px);
+}
+.gallery img.visible { opacity:1; transform:translateY(0); }
+.gallery img:hover { transform:scale(1.05); }
+
+footer {
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+  color:#777;
+  margin-top:40px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:all 1s ease;
+}
+footer.visible { opacity:1; transform:translateY(0); }
+
+/* ======== CORAZONES FLOTANTES ======== */
+.heart {
+  position:fixed;
+  width:20px;
+  height:20px;
+  background:red;
+  transform:rotate(-45deg);
+  bottom:0;
+  animation: floatUp 4s linear forwards;
+  z-index:1000;
+}
+.heart::before, .heart::after {
+  content:"";
+  position:absolute;
+  width:20px; height:20px;
+  background:red;
+  border-radius:50%;
+}
+.heart::before { top:-10px; left:0; }
+.heart::after { top:0; left:10px; }
+
+@keyframes floatUp {
+  0%{ transform:translateX(0) translateY(0) rotate(-45deg); opacity:1; }
+  100%{ transform:translateX(calc(-50px + 100px * var(--randX))) translateY(-600px) rotate(-45deg); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     PREPANTALLA
+===================================================== -->
+<div id="prep-overlay" class="overlay">
+  <div class="overlay-container">
+    <h2>¿Estás lista para abrir tu regalo?</h2>
+    <div class="option" id="prep-si">Sí</div>
+    <div class="option" id="prep-no">No</div>
+  </div>
+</div>
+
+<!-- =====================================================
+     PANTALLA "NO"
+===================================================== -->
+<div id="no-overlay" class="overlay" style="display:none;">
+  <div class="overlay-container" id="no-container">
+    <h2 id="no-message">Tienes que darle al Sí iluminada mía</h2>
+    <div class="option" id="no-si">Sí</div>
+    <img src="calvo.jpg" alt="No" style="width:100%; border-radius:10px; margin-top:10px;">
+  </div>
+</div>
+
+<!-- =====================================================
+     PANTALLA DE CARGA
+===================================================== -->
+<div id="loading-overlay" class="overlay" style="display:none;">
+  <div class="overlay-container">
+    <h2>Prepárate gafotas que esta no te la sabes...</h2>
+    <img src="gato.jpg" alt="Loading" style="width:100%; border-radius:10px; margin-top:10px;">
+  </div>
+</div>
+
+<!-- =====================================================
+     QUIZ
+===================================================== -->
+<div id="quiz-overlay" class="overlay" style="display:none;">
+  <div class="overlay-container">
+    <h2 id="quiz-question"></h2>
+    <div id="options-container"></div>
+    <div id="message"></div>
+  </div>
+</div>
+
+<!-- =====================================================
+     AUDIOS
+===================================================== -->
+<audio id="quiz-music" loop>
+  <source src="quiz.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-option" preload="auto">
+  <source src="hover.mp3" type="audio/mpeg">
+</audio>
+<audio id="correct-sound" preload="auto">
+  <source src="correct.mp3" type="audio/mpeg">
+</audio>
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
+<div id="main-content">
+  <h1>🎉 Feliz Cumpleaños, Amor 🎉</h1>
+
+  <div class="section">
+    <h2 class="section-title">💌 Mensaje para Ti</h2>
+    <p class="reveal">Hoy celebramos tu vida, pero también celebro cada instante contigo. Tu risa, tus abrazos, tus locuras… todo eso que me hace sentir que estoy exactamente donde debo estar.</p>
+    <p class="reveal">Gracias por ser tú. Por elegirme. Por hacerme mejor. Te amo más de lo que las palabras pueden decir.</p>
+    <button onclick="mostrarSorpresa()">Haz clic para ver mi promesa</button>
+    <div id="sorpresa">✨ Prometo seguir construyendo contigo cada día, cada sueño, cada aventura. Siempre tuyo. ✨</div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📅 Recuerdos Compartidos</h2>
+    <div class="timeline">
+      <div class="memory" onclick="alert('Nuestro primer viaje juntos. ¿Recuerdas el desayuno con vistas al mar?')">22 de abril de 2023</div>
+      <div class="memory" onclick="alert('El día que me hiciste reír hasta llorar. Inolvidable.')">15 de julio de 2023</div>
+      <div class="memory" onclick="alert('Nuestra primera película juntos. Spoiler: me enamoré más.')">3 de octubre de 2023</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">📸 Álbum de Fotos</h2>
+    <div class="gallery">
+      <img src="https://via.placeholder.com/300x200?text=Viaje+1" alt="Viaje 1">
+      <img src="https://via.placeholder.com/300x200?text=Risa+2" alt="Risa 2">
+      <img src="https://via.placeholder.com/300x200?text=Mirada+3" alt="Mirada 3">
+      <img src="https://via.placeholder.com/300x200?text=Abrazo+4" alt="Abrazo 4">
+    </div>
+  </div>
+
+  <footer>Hecho con 💖 para ti. Siempre juntos.</footer>
+</div>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+<script>
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+const prepSi = document.getElementById('prep-si');
+const prepNo = document.getElementById('prep-no');
+const noSi = document.getElementById('no-si');
+const prepOverlay = document.getElementById('prep-overlay');
+const noOverlay = document.getElementById('no-overlay');
+const loadingOverlay = document.getElementById('loading-overlay');
+const quizOverlay = document.getElementById('quiz-overlay');
+const mainContent = document.getElementById('main-content');
+const message = document.getElementById('message');
+const music = document.getElementById('quiz-music');
+const quizQuestionElem = document.getElementById("quiz-question");
+const optionsContainer = document.getElementById("options-container");
+const soundOption = document.getElementById("sound-option");
+const correctSound = document.getElementById("correct-sound");
+
+/* =====================================================
+   ANIMACION BOTONES PREPANTALLA
+===================================================== */
+[prepSi, prepNo].forEach((btn,i)=>{ setTimeout(()=>btn.classList.add('visible'), i*400); });
+
+/* =====================================================
+   EVENTOS BOTONES PREPANTALLA
+===================================================== */
+prepSi.addEventListener('click', ()=>{
+  prepOverlay.style.display='none';
+  loadingOverlay.style.display='flex';
+  setTimeout(iniciarQuiz,6000);
+});
+
+prepNo.addEventListener('click', ()=>{
+  prepOverlay.style.display='none';
+  noOverlay.style.display='flex';
+  prepNo.style.display='none'; // desaparece solo el botón NO
+  // Mostrar el botón "Sí" de la pantalla "No"
+  setTimeout(()=>noSi.classList.add('visible'),100);
+});
+
+noSi.addEventListener('click', ()=>{
+  noOverlay.style.display='none';
+  loadingOverlay.style.display='flex';
+  setTimeout(iniciarQuiz,6000);
+});
+
+/* =====================================================
+   INICIAR QUIZ
+===================================================== */
+function iniciarQuiz(){
+  loadingOverlay.style.display='none';
+  quizOverlay.style.display='flex';
+  if(music.readyState>=2){ music.currentTime=0; music.play().catch(err=>console.log(err)); }
+
+  const pregunta = "🎬 ¿Cuál fue la primera película que vimos juntos?";
+  mostrarPreguntaMaquina(pregunta, quizQuestionElem,50, mostrarOpciones);
+}
+
+/* =====================================================
+   OPCIONES DEL QUIZ
+===================================================== */
+const opcionesData = [
+  { text:"Titanic", correct:false },
+  { text:"Up", correct:true },
+  { text:"La La Land", correct:false },
+  { text:"Avatar", correct:false }
+];
+
+function mostrarOpciones(){
+  optionsContainer.innerHTML="";
+  opcionesData.forEach((opt,i)=>{
+    const btn=document.createElement("div");
+    btn.className="option";
+    btn.textContent=opt.text;
+    btn.dataset.correct=opt.correct;
+
+    btn.addEventListener('mouseenter',()=>{ 
+      if(soundOption.readyState>=2){ 
+        soundOption.currentTime=0; 
+        soundOption.play().catch(err=>console.log(err)); 
+      } 
+    });
+
+    btn.onclick=()=>{
+      if(opt.correct){
+        message.textContent="¡Correcto! ❤️";
+        message.style.color="lightgreen";
+
+        correctSound.currentTime=0;
+        correctSound.play().catch(err=>console.log(err));
+
+        // Detener música completamente
+        music.pause();
+        music.currentTime=0;
+
+        setTimeout(()=>{
+          quizOverlay.style.display="none";
+          mainContent.style.display="block";
+          setTimeout(()=>mainContent.style.opacity="1",50);
+          lanzarCorazones(); 
+          revealOnScroll();
+        },1000);
+
+      } else {
+        message.textContent="No era esa, amor. 😘 Intenta de nuevo.";
+        message.style.color="red"; 
+        setTimeout(()=>message.textContent="",3000);
+      }
+    };
+
+    optionsContainer.appendChild(btn);
+    setTimeout(()=>btn.classList.add('visible'), i*600);
+  });
+}
+
+/* =====================================================
+   FUNCIONES AUXILIARES
+===================================================== */
+function mostrarSorpresa(){ 
+  document.getElementById("sorpresa").style.display="block"; 
+}
+
+function lanzarCorazones(){
+  const interval=setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart"; 
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.setProperty("--randX",Math.random());
+    heart.style.width=(10+Math.random()*20)+"px";
+    heart.style.height=heart.style.width;
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+  },300);
+  setTimeout(()=>clearInterval(interval),10000);
+}
+
+function revealOnScroll(){
+  const elems=document.querySelectorAll('.reveal, .section, .gallery img, h1, h2.section-title, footer');
+  const reveal=()=>{
+    const h=window.innerHeight;
+    elems.forEach(el=>{ if(el.getBoundingClientRect().top<h-50) el.classList.add('visible'); });
+  };
+  window.addEventListener('scroll',reveal); 
+  reveal();
+}
+
+function mostrarPreguntaMaquina(texto, elemento, velocidad=50, callback){
+  elemento.textContent=""; 
+  let i=0;
+  const intervalo=setInterval(()=>{
+    elemento.textContent+=texto[i]; 
+    i++;
+    if(i>=texto.length){ clearInterval(intervalo); if(callback) callback(); }
+  }, velocidad);
+}
+</script>
+</body>
+</html>
